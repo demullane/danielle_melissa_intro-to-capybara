@@ -26,8 +26,26 @@ describe 'User can CRUD locations' do
   end
 
   scenario 'User can view a show page for a location' do
-    #fill in
 
+    # visit root
+    visit '/'
+
+    # click on link to go to new location form
+    click_on "New Location"
+
+    #filling out form for location
+    fill_in 'location[name]', :with => "Home"
+    fill_in 'location[address]', with: "New Address"
+    fill_in 'location[zipcode]', with: "90210"
+
+    #submitting form to create a location
+    click_on "Create Location"
+
+    #redirect to show page
+    click_on "Home"
+    expect(page).to have_content("Home")
+    expect(page).to have_content("New Address")
+    expect(page).to have_content("90210")
   end
 
   scenario 'User can edit a location' do
